@@ -3,11 +3,12 @@ from keyboard_dict import QWERTY_DICT
 
 def random_typo(word):
     """Introduce a random typo"""
-    # produce a random letter
-    new_letter = chr(random.randint(97,122))
-    
+
     # pick a random position in the word
     pos = random.randint(0, len(word)-1)
+    
+    # produce a random letter
+    new_letter = chr(random.randint(97,122))
     
     # create new word with typo
     new_word = word[:pos] + new_letter + word[pos+1:]
