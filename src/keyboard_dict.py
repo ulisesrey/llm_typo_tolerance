@@ -1,4 +1,4 @@
-qwerty_dict = {
+QWERTY_DICT = {
     'Q': ['W', 'A'],
     'W': ['Q', 'E', 'A', 'S'],
     'E': ['W', 'R', 'S', 'D'],
