@@ -78,6 +78,9 @@ if __name__ == "__main__":
 
     # # print the typo
     # print(typo_word1,typo_word2)
-    word = input("Enter a word: ")
-    new_word = keyboard_aware_typo(word)
-    print(new_word)
+    text = "what is the capital of france"
+    print(text)
+    repetitions = 30
+    for i in range(repetitions):
+        text = random_typo(text)
+        print(i, text)
