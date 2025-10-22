@@ -1,4 +1,5 @@
 import pandas as pd
+import csv
 import random
 from keyboard_dict import QWERTY_DICT
 from pathlib import Path
@@ -96,7 +97,7 @@ if __name__ == "__main__":
     # typo_method = "random"
    
     with typos_output_file.open("w") as f:
-        f.write("question_id,typo_method,iteration,question_with_typo\n")
+        f.write("round,question_id,typo_method,iteration,question_with_typo\n")
         for round in range(rounds):
             for typo_method in typo_functions.keys():
                 question = df["question"][question_id]
@@ -109,7 +110,7 @@ if __name__ == "__main__":
                     typo_word = typo_functions[typo_method](word)
                     question[target_index] = typo_word
                     question_with_typo = " ".join(question)
-                    f.write(f"{question_id},{typo_method},{i},{question_with_typo}\n")
+                    f.write(f"{round},{question_id},{typo_method},{i},{question_with_typo}\n")
 
         
 
