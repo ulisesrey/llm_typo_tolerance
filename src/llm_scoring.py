@@ -9,13 +9,17 @@ df = pd.read_csv("data/typos.csv")
 df_source = pd.read_csv("data/source.csv")
 llm_scores = Path("data/llm_scores.csv")
 model = "mistral:latest"
-temp = 0.0
+temp = 0.2
 
+# check if output file exists
+file_exists = llm_scores.exists() and llm_scores.stat().st_size > 0 # Check if file exists AND has content
 
-with llm_scores.open("w", newline="") as f:
+with llm_scores.open("a", newline="") as f:
     writer = csv.writer(f)
-    #output will be
-    writer.writerow(["question_id", "typo_method", "iteration", "llm_model", "temperature", "llm_answer", "score"])
+
+    # write headers if file does not exist
+    if not file_exists:
+        writer.writerow(["question_id", "typo_method", "iteration", "llm_model", "temperature", "llm_answer", "score"])
     
     # create llm
     llm = ChatOllama(model=model,
