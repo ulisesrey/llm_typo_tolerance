@@ -38,6 +38,16 @@ def insertion_typo(word):
 
     return new_word
 
+def duplication_typo(word):
+    """Introduce a duplication"""
+    # pick a random position in the word
+    pos = random.randint(0, len(word)-1)
+
+    # create new word with typo
+    new_word = word[:pos] + word[pos] + word[pos:]
+
+    return new_word
+
 def wrong_spacing_typo(word1, word2):
     """Introduce a wrong spacing typo"""
     # create new word with typo
@@ -51,7 +61,7 @@ def wrong_spacing_typo(word1, word2):
     return word1, word2
 
 def keyboard_aware_typo(word):
-    # print(QWERTY_DICT[letter])
+    """Return text with typos added, based on QWERTY keyboard key locations"""
     
     # pick a random position in the word
     pos = random.randint(0, len(word)-1)
@@ -70,14 +80,6 @@ def keyboard_aware_typo(word):
 
 
 if __name__ == "__main__":
-    # # get a word from the user
-    # word1 = input("Enter a word: ")
-    # word2 = input("Enter another word: ")
-    # # introduce a typo
-    # typo_word1, typo_word2 = wrong_spacing_typo(word1, word2)
-
-    # # print the typo
-    # print(typo_word1,typo_word2)
     text = "what is the capital of france"
     print(text)
     repetitions = 30
