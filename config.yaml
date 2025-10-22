@@ -1,3 +1,5 @@
+temperature: 0.1
+
 models:
 - qwq:32b
 - qwen:latest
