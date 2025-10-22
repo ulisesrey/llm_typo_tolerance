@@ -5,12 +5,31 @@ import pandas as pd
 
 df = pd.read_csv("data/llm_scores.csv")
 
-df.head()
+# Assuming 'df' is the DataFrame read from "data/llm_scores.csv"
+# df = pd.read_csv("data/llm_scores.csv") 
 
-# df groupby typo_method and iteration and calculate mean score
-mean_score = df.groupby(["typo_method", "iteration"])["score"].mean()
+# Use the raw DataFrame 'df' for the plot
+# By default, 'sns.lineplot' calculates the mean of 'score' for each ('typo_method', 'iteration') 
+# and plots the 95% confidence interval (CI) as the shaded area.
+sns.lineplot(
+    x="iteration", 
+    y="score", 
+    hue="typo_method", 
+    data=df, 
+    errorbar=("ci", 95) # Explicitly set to 95% Confidence Interval (the default)
+)
+iterations = df["iteration"].unique()
+for iter_num in iterations:
+    plt.axvline(
+        x=iter_num, 
+        color='gray',      # Color of the line
+        linestyle='--',     # Dotted line style
+        linewidth=1,       # Thickness of the line
+        zorder=0,
+        alpha=0.5           # Ensure the line is behind the data and bands
+    )
 
-mean_score = mean_score.reset_index()
-
-sns.lineplot(x="iteration", y="score", hue="typo_method", data=mean_score)
+plt.title("LLM Score Robustness Over Iterations (with 95% CI)")
+plt.xlabel("Iteration (number of typos added)")
+plt.ylabel("Mean Score (% of correct answers)")
 plt.show()
