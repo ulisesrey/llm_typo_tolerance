@@ -92,8 +92,8 @@ if __name__ == "__main__":
     question_id = 0
     df = pd.read_csv("data/source.csv")
     typos_output_file = Path("data/typos.csv")
-    rounds = 10
-    typo_iterations = 20 # Should it be a function of len(question)? % of text
+    rounds = 20
+    typo_iterations = 25 # Should it be a function of len(question)? % of text
     # typo_method = "random"
    
     with typos_output_file.open("w", newline="") as f:
@@ -108,6 +108,7 @@ if __name__ == "__main__":
                 question = question.split(" ")
                 print(typo_method)
                 for i in range(typo_iterations):
+                    # TODO: It would be best that typo iterations are not a chain, but independent I think
                     print(i, " ".join(question))
                     target_index = random.randint(0, len(question)-1)
                     word = question[target_index]
