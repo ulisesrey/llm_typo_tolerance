@@ -81,9 +81,9 @@ def keyboard_aware_typo(word):
 
 typo_functions = {
         "random": random_typo,
-        "deletion": deletion_typo,
-        "insertion": insertion_typo,
-        "duplication": duplication_typo,
+        #"deletion": deletion_typo,
+        #"insertion": insertion_typo,
+        #"duplication": duplication_typo,
         "keyboard_aware": keyboard_aware_typo
     }
 
@@ -91,23 +91,25 @@ if __name__ == "__main__":
     question_id = 0
     df = pd.read_csv("data/source.csv")
     typos_output_file = Path("data/typos.csv")
-    iterations = 20 # Should it be a function of len(question)? % of text
-    typo_method = "random"
-
-    question = df["question"][question_id]
-    answer = df["answer"][question_id]
-    question = question.split(" ")
-    
+    rounds = 10
+    typo_iterations = 20 # Should it be a function of len(question)? % of text
+    # typo_method = "random"
+   
     with typos_output_file.open("w") as f:
         f.write("question_id,typo_method,iteration,question_with_typo\n")
-        for i in range(iterations):
-            print(i, " ".join(question))
-            target_index = random.randint(0, len(question)-1)
-            word = question[target_index]
-            typo_word = typo_functions[typo_method](word)
-            question[target_index] = typo_word
-            question_with_typo = " ".join(question)
-            f.write(f"{question_id},{typo_method},{i},{question_with_typo}\n")
+        for round in range(rounds):
+            for typo_method in typo_functions.keys():
+                question = df["question"][question_id]
+                question = question.split(" ")
+                print(typo_method)
+                for i in range(typo_iterations):
+                    print(i, " ".join(question))
+                    target_index = random.randint(0, len(question)-1)
+                    word = question[target_index]
+                    typo_word = typo_functions[typo_method](word)
+                    question[target_index] = typo_word
+                    question_with_typo = " ".join(question)
+                    f.write(f"{question_id},{typo_method},{i},{question_with_typo}\n")
 
         
 
