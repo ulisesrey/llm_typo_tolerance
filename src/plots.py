@@ -14,7 +14,8 @@ df = pd.read_csv("data/llm_scores.csv")
 sns.lineplot(
     x="iteration", 
     y="score", 
-    hue="typo_method", 
+    hue="typo_method",
+    style="temperature",
     data=df, 
     errorbar=("ci", 95) # Explicitly set to 95% Confidence Interval (the default)
 )
