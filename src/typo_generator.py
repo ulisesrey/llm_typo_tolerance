@@ -96,8 +96,12 @@ if __name__ == "__main__":
     typo_iterations = 20 # Should it be a function of len(question)? % of text
     # typo_method = "random"
    
-    with typos_output_file.open("w") as f:
-        f.write("round,question_id,typo_method,iteration,question_with_typo\n")
+    with typos_output_file.open("w", newline="") as f:
+        # initialize the csv writer
+        writer = csv.writer(f)
+        # write the writer row
+        writer.writerow(["round", "question_id", "typo_method", "iteration", "question_with_typo"])
+
         for round in range(rounds):
             for typo_method in typo_functions.keys():
                 question = df["question"][question_id]
@@ -110,7 +114,8 @@ if __name__ == "__main__":
                     typo_word = typo_functions[typo_method](word)
                     question[target_index] = typo_word
                     question_with_typo = " ".join(question)
-                    f.write(f"{round},{question_id},{typo_method},{i},{question_with_typo}\n")
+                    writer.writerow([round, question_id, typo_method, i, question_with_typo])
+
 
         
 
