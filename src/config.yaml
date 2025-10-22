@@ -1,0 +1,7 @@
+models:
+- qwq:32b
+- qwen:latest
+- mistral:latest
+- deepseek-r1:8b
+- qwen2:7b
+- llama3.2:latest
