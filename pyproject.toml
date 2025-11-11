@@ -9,6 +9,7 @@ dependencies = [
     "langchain-ollama>=1.0.0",
     "matplotlib>=3.10.7",
     "pandas>=2.3.3",
+    "pypinyin>=0.55.0",
     "seaborn>=0.13.2",
     "tqdm>=4.67.1",
 ]
