@@ -1,3 +1,5 @@
+"""Set of functions to create typos"""
+
 import pandas as pd
 import csv
 import random
@@ -79,6 +81,36 @@ def keyboard_aware_typo(word):
     new_word = word[:pos] + new_letter + word[pos+1:]
     
     return new_word
+
+def get_next_letter(letter):
+    """Returns the next letter in the English alphabet."""
+    
+    # 1. Get the character's numerical code (e.g., 'a' -> 97)
+    current_code = ord(letter)
+    
+    # 2. Increment the code by 1 (e.g., 97 + 1 = 98)
+    next_code = current_code + 1
+    
+    # 3. Convert the new code back to a character (e.g., 98 -> 'b')
+    next_letter = chr(next_code)
+    
+    return next_letter
+
+def encryption(word):
+    """Introduce an encryption typo based on next letter ('a'->'b', 'b'->'c', etc.).
+    e.g. "Hello" becomes "Ifmmp" """
+    # pick a random position in the word
+    pos = random.randint(0, len(word)-1)
+
+    # get the letter in that position
+    letter = word[pos]
+    new_letter = get_next_letter(letter)
+
+    # create new word with typo
+    new_word = word[:pos] + new_letter + word[pos:]
+
+    return new_word
+
 
 typo_functions = {
         "random": random_typo,
